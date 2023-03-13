@@ -1,18 +1,35 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+    <img alt="logo pokemon" src="./../assets/logoPokemonImagen.jpeg" />
+    <!-- {{$store.state.pokemon.pokemonList}} -->
+    <CompPokemonList :listaPokemon="$store.state.pokemon.pokemonList"/>
+  </div> 
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+// import {mapActions} from 'vuex'
+import CompPokemonList from "../components/CompPokemonList.vue";
+
 
 export default {
   name: "Home",
   components: {
-    HelloWorld,
+    CompPokemonList,
+  },
+  data(){
+    return{
+    }
+  },
+  methods: {
+  // ...mapActions(['pokemon/traerPokemonList'])
+},
+  mounted() {
+    if(!this.$store.state.pokemon.pokemonList.length){
+      this.$store.dispatch("pokemon/traerPokemonList");
+      // El nombre pokemon viene de la carpeta module que tengo en la columna de la izq 
+      // y mi archivo se llama module
+    }
+    // this['pokemon/traerPokemonList']();
   },
 };
 </script>
